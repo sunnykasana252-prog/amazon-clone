@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Amazon.in - Online Shopping</title>
+
+<link rel="stylesheet" href="amazon.css">
+</head>
+<body>
+
+
+<header>
+  <div class="nav-main">
+   
+    <div class="logo" onclick="scrollTo(0,0)">
+      <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="4" y="28" font-family="Arial Black,Arial" font-weight="900" font-size="26" fill="#FF9900">amazon</text>
+        <path d="M8 33 Q40 42 76 36" stroke="#FF9900" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <text x="78" y="34" font-family="Arial" font-size="13" fill="#FF9900">.in</text>
+        <polygon points="82,29 88,26 88,32" fill="#FF9900"/>
+      </svg>
+    </div>
+
+   
+    <div class="deliver">
+      <span class="label">📍 Deliver to</span>
+      <span class="loc">ghaziabad ABES engginering collage</span>
+    </div>
+
+    
+    <div class="search-bar">
+      <select class="search-cat" id="searchCat">
+        <option>All</option>
+        <option>Electronics</option>
+        <option>Books</option>
+        <option>Fashion</option>
+        <option>Home & Kitchen</option>
+        <option>Beauty</option>
+        <option>Sports</option>
+        <option>Toys</option>
+        <option>Grocery</option>
+        <option>Automotive</option>
+      </select>
+      <input class="search-input" type="text" id="searchInput" placeholder="Search Amazon.in" />
+      <button class="search-btn" onclick="doSearch()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    </div>
+
+  
+    <div class="nav-right">
+      <button class="nav-btn" onclick="showToast('Sign in to your account')">
+        <span class="line1">Hello, Sign in</span>
+        <span class="line2">Account &amp; Lists ▾</span>
+      </button>
+      <button class="nav-btn" onclick="showToast('Opening your orders…')">
+        <span class="line1">Returns</span>
+        <span class="line2">&amp; Orders</span>
+      </button>
+      <div class="cart-btn" onclick="showToast('Your cart has ' + cartCount + ' item(s)')">
+        <div style="position:relative">
+          <svg viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2h5l4 18h18l3-12H9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="16" cy="29" r="2.5" fill="#fff"/>
+            <circle cx="28" cy="29" r="2.5" fill="#fff"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <span class="cart-label">Cart</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="sub-nav">
+    <div class="sub-nav-item all">
+      <svg class="hamburger" viewBox="0 0 20 14" fill="white"><rect width="20" height="2" rx="1"/><rect y="6" width="20" height="2" rx="1"/><rect y="12" width="20" height="2" rx="1"/></svg>
+      All
+    </div>
+    <div class="sub-nav-item" onclick="showToast('Today\'s Deals')">Today's Deals</div>
+    <div class="sub-nav-item prime" onclick="showToast('Try Prime free')">Prime</div>
+    <div class="sub-nav-item" onclick="showToast('Customer Service')">Customer Service</div>
+    <div class="sub-nav-item" onclick="showToast('New Arrivals')">New Arrivals</div>
+    <div class="sub-nav-item" onclick="showToast('Electronics')">Electronics</div>
+    <div class="sub-nav-item" onclick="showToast('Fashion')">Fashion</div>
+    <div class="sub-nav-item" onclick="showToast('Home & Kitchen')">Home &amp; Kitchen</div>
+    <div class="sub-nav-item" onclick="showToast('Books')">Books</div>
+    <div class="sub-nav-item" onclick="showToast('Sell on Amazon')">Sell</div>
+  </div>
+</header>
+
+
+<div class="hero">
+  <div class="hero-track" id="heroTrack">
+  
+    <div class="hero-slide" style="background:linear-gradient(135deg,#0f3460,#16213e)">
+      <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1400&q=80" alt="Electronics Sale"/>
+      <div class="hero-overlay">
+        <h2>🔥 Electronics Sale</h2>
+        <p>Up to 60% off on laptops, phones, and accessories.</p>
+        <button class="btn-shop" onclick="showToast('Opening Electronics…')">Shop Electronics</button>
+      </div>
+    </div>
+   
+    <div class="hero-slide" style="background:#1a1a2e">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1400&q=80" alt="Fashion Week"/>
+      <div class="hero-overlay">
+        <h2>👗 Fashion Week</h2>
+        <p>Trendy styles for every occasion. Flat 50% off.</p>
+        <button class="btn-shop" onclick="showToast('Opening Fashion…')">Shop Fashion</button>
+      </div>
+    </div>
+  
+    <div class="hero-slide" style="background:#0a3d0a">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1400&q=80" alt="Kitchen Essentials"/>
+      <div class="hero-overlay">
+        <h2>🍳 Kitchen Sale</h2>
+        <p>Premium cookware and appliances at best prices.</p>
+        <button class="btn-shop" onclick="showToast('Opening Home & Kitchen…')">Shop Now</button>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background:#2d1b00">
+      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80" alt="Books"/>
+      <div class="hero-overlay">
+        <h2>📚 Books & More</h2>
+        <p>Bestsellers and new releases. Buy 2 get 1 free.</p>
+        <button class="btn-shop" onclick="showToast('Opening Books…')">Shop Books</button>
+      </div>
+    </div>
+  </div>
+  <button class="hero-arrow prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="hero-arrow next" onclick="moveSlide(1)">&#8250;</button>
+  <div class="hero-dots" id="heroDots"></div>
+</div>
+
+<div class="content">
+
+  <div class="card">
+    <h3>Electronics</h3>
+    <div class="cat-grid">
+      <div class="cat-item" onclick="addToCart('Headphones')">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=80" alt="Headphones"/>
+        <p>Headphones</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Smartwatch')">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&q=80" alt="Smartwatch"/>
+        <p>Smartwatch</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Camera')">
+        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=300&q=80" alt="Camera"/>
+        <p>Camera</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Laptop')">
+        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=300&q=80" alt="Laptop"/>
+        <p>Laptop</p>
+      </div>
+    </div>
+    <a href="#">See all offers →</a>
+  </div>
+
+  <div class="card">
+    <h3>Fashion Picks</h3>
+    <div class="cat-grid">
+      <div class="cat-item" onclick="addToCart('Men\'s Shirt')">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=300&q=80" alt="Men's Shirt"/>
+        <p>Men's Shirts</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Women\'s Dress')">
+        <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&q=80" alt="Women's Dress"/>
+        <p>Women's Dress</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Sneakers')">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80" alt="Sneakers"/>
+        <p>Sneakers</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Handbag')">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&q=80" alt="Handbag"/>
+        <p>Handbags</p>
+      </div>
+    </div>
+    <a href="#">Explore all →</a>
+  </div>
+
+  <div class="card deal-card">
+    <div class="deal-badge">⚡ Deal of the Day</div>
+    <h3 style="margin-top:28px">Top Deals</h3>
+    <div class="product-scroll" id="dealScroll"></div>
+    <a href="#">See all deals →</a>
+  </div>
+
+  <div class="card">
+    <h3>Home &amp; Kitchen</h3>
+    <div class="cat-grid">
+      <div class="cat-item" onclick="addToCart('Air Fryer')">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=80" alt="Kitchen"/>
+        <p>Appliances</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Sofa')">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=80" alt="Furniture"/>
+        <p>Furniture</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Bedsheet')">
+        <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?w=300&q=80" alt="Bedding"/>
+        <p>Bedding</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Lamp')">
+        <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=300&q=80" alt="Lighting"/>
+        <p>Lighting</p>
+      </div>
+    </div>
+    <a href="#">Shop Home →</a>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;grid-column: span 2;">
+    <div class="prime-banner">
+      <div>
+        <h3>Try <span style="color:var(--amazon-teal)">Prime</span> Free</h3>
+        <p>Fast delivery · Exclusive deals · Prime Video · Ad-free music and more.</p>
+      </div>
+      <button class="btn-prime" onclick="showToast('Starting your free Prime trial!')">Start Free Trial</button>
+    </div>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1">
+    <h3>🏆 Best Sellers</h3>
+    <div class="product-scroll" id="bestsellerScroll"></div>
+    <a href="#">See all best sellers →</a>
+  </div>
+
+  <div class="card" style="grid-column: 1 / -1">
+    <h3>🕓 Recently Viewed</h3>
+    <div class="product-scroll" id="recentScroll"></div>
+    <a href="#">View history →</a>
+  </div>
+
+  <div class="full-banner" onclick="showToast('Opening Grocery store…')">
+    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80" alt="Grocery"/>
+  </div>
+
+  <div class="card">
+    <h3>📚 Books</h3>
+    <div class="cat-grid">
+      <div class="cat-item" onclick="addToCart('Fiction Book')">
+        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=80" alt="Fiction"/>
+        <p>Fiction</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Self-Help Book')">
+        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=300&q=80" alt="Self-Help"/>
+        <p>Self-Help</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Children\'s Book')">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=80" alt="Children"/>
+        <p>Children's</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Academic Book')">
+        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=80" alt="Academic"/>
+        <p>Academic</p>
+      </div>
+    </div>
+    <a href="#">Browse all books →</a>
+  </div>
+
+  <div class="card">
+    <h3>💄 Beauty &amp; Health</h3>
+    <div class="cat-grid">
+      <div class="cat-item" onclick="addToCart('Skincare Kit')">
+        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80" alt="Skincare"/>
+        <p>Skincare</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Hair Dryer')">
+        <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=300&q=80" alt="Hair Care"/>
+        <p>Hair Care</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Vitamins')">
+        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300&q=80" alt="Health"/>
+        <p>Health</p>
+      </div>
+      <div class="cat-item" onclick="addToCart('Perfume')">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=300&q=80" alt="Fragrance"/>
+        <p>Fragrance</p>
+      </div>
+    </div>
+    <a href="#">Shop Beauty →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-back" onclick="scrollTo({top:0,behavior:'smooth'})">▲ Back to top</div>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Get to Know Us</h4>
+      <ul>
+        <li><a href="#">About Amazon</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press Releases</a></li>
+        <li><a href="#">Amazon Science</a></li>
+        <li><a href="#">Investor Relations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Make Money with Us</h4>
+      <ul>
+        <li><a href="#">Sell on Amazon</a></li>
+        <li><a href="#">Sell under Amazon Accelerator</a></li>
+        <li><a href="#">Amazon Associates</a></li>
+        <li><a href="#">Fulfilment by Amazon</a></li>
+        <li><a href="#">Advertise Your Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Amazon Payment Products</h4>
+      <ul>
+        <li><a href="#">Amazon Pay</a></li>
+        <li><a href="#">Amazon Pay ICICI Credit Card</a></li>
+        <li><a href="#">Reload Your Balance</a></li>
+        <li><a href="#">Amazon Currency Converter</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Let Us Help You</h4>
+      <ul>
+        <li><a href="#">COVID-19 and Amazon</a></li>
+        <li><a href="#">Your Account</a></li>
+        <li><a href="#">Your Orders</a></li>
+        <li><a href="#">Shipping Rates &amp; Policies</a></li>
+        <li><a href="#">Returns &amp; Replacements</a></li>
+        <li><a href="#">Manage Your Content and Devices</a></li>
+        <li><a href="#">Amazon Assistant</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">
+      <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+        <text x="4" y="28" font-family="Arial Black" font-weight="900" font-size="26" fill="#FF9900">amazon</text>
+        <path d="M8 33 Q40 42 76 36" stroke="#FF9900" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <text x="78" y="34" font-family="Arial" font-size="13" fill="#FF9900">.in</text>
+        <polygon points="82,29 88,26 88,32" fill="#FF9900"/>
+      </svg>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <a href="#" style="color:#888;font-size:12px">Conditions of Use &amp; Sale</a>
+      <a href="#" style="color:#888;font-size:12px">Privacy Notice</a>
+      <a href="#" style="color:#888;font-size:12px">Interest-Based Ads Notice</a>
+    </div>
+    <p>© 1996-2026, Amazon.com, Inc. or its affiliates</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="amazon.js"></script>
+</body>
+</html>
